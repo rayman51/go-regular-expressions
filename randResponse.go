@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"regexp"
 	"time"
 )
 
@@ -12,13 +13,13 @@ var ques = []string{
 	"People say I look like both my mother and father.",
 	"Father was a teacher.",
 	"I was my father’s favourite.",
-	"I'm looking forward to the weekend.",
+	"I am looking forward to the weekend.",
 	"My grandfather was French!",
 }
 
 // https://gist.github.com/ianmcloughlin/c4c2b8dc586d06943f54b75d9e2250fe
-func ElizaResponse() string {
-	/*if matched, _ := regexp.MatchString(`(?i).*\bfather\b.*`, input); matched {
+func ElizaResponse(input string) string {
+	if matched, _ := regexp.MatchString(`(?i).*\bfather\b.*`, input); matched {
 		return "Why don’t you tell me more about your father?" //checks for the word "father" and gives this response
 	}
 
@@ -26,11 +27,11 @@ func ElizaResponse() string {
 	if matched := re.MatchString(input); matched {
 		return re.ReplaceAllString(input, "How do you know you are $1?") // checks for "I am" and gives this response
 	}
-
-	re2 := regexp.MustCompile(`(?i)I'm ([^.?!]*)[.?!]?`)
-	if matched := re2.MatchString(input); matched {
-		return re.ReplaceAllString(input, "How do you know you are $1?") // checks for "I'm" and gives this response
-	}*/
+	/*
+		re2 := regexp.MustCompile(`(?i)I'm ([^.?!]*)[.?!]?`)
+		if matched := re2.MatchString(input); matched {
+			return re.ReplaceAllString(input, "How do you know you are $1?") // checks for "I'm" and gives this response
+		}*/
 	answers := []string{ // randon answers given if there are no matches
 		"I’m not sure what you’re trying to say. Could you explain it to me?",
 		"How does that make you feel?",
@@ -97,6 +98,6 @@ func main() {
 	for i := 0; i < 5; i++ {
 
 		fmt.Println("Q:" + ques[i])
-		fmt.Println("Re:" + ElizaResponse())
+		fmt.Println("Re:" + ElizaResponse(ques[i]))
 	}
 } // main

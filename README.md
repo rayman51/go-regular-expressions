@@ -11,3 +11,7 @@ In order for you to run these programs you will need to install the [GO](https:/
 compiler on your computer.
 ## Run the code
 Once you have installed the compiler, and have the files on your computer, open a command line of your choice. Next, navigate your way to the folder. Then run the command "go build" followed by the name of the go file(including the file extension) you wish to run. This will then create an executeable file of the same name, but with an ".exe" ententsion. Then simpily run the .exe file and the GO program will run. 
+
+![alt tag](https://github.com/rayman51/go-regular-expressions/blob/master/images/pic1.PNG)
+
+When the program runs the user is presented with a list of question and a response from the program.

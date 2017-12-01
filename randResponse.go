@@ -15,6 +15,10 @@ var ques = []string{
 	"I was my father’s favourite.",
 	"I am looking forward to the weekend.",
 	"My grandfather was French!",
+	"I am happy.",
+	"I am not happy with your responses.",
+	"I am not sure that you understand the effect that your questions are having on me.",
+	"I am supposed to just take what you’re saying at face value?",
 }
 
 // https://gist.github.com/ianmcloughlin/c4c2b8dc586d06943f54b75d9e2250fe
@@ -95,7 +99,7 @@ func main() {
 	fmt.Println(ElizaResponse("I am supposed to just take what you’re saying at face value?"))
 	fmt.Println() // matches I am
 	*/
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 9; i++ {
 
 		fmt.Println("Q:" + ques[i])
 		fmt.Println("Re:" + ElizaResponse(ques[i]))

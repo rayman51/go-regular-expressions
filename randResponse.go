@@ -16,6 +16,8 @@ var ques = []string{
 	"I am looking forward to the weekend.",
 	"My grandfather was French!",
 	"I am happy.",
+	"I'm sad",
+	"Im tired",
 	"I am not happy with your responses.",
 	"I am not sure that you understand the effect that your questions are having on me.",
 	"I am supposed to just take what you’re saying at face value?",
@@ -27,15 +29,15 @@ func ElizaResponse(input string) string {
 		return "Why don’t you tell me more about your father?" //checks for the word "father" and gives this response
 	}
 
-	re := regexp.MustCompile(`(?i)I am ([^.?!]*)[.?!]?`)
+	re := regexp.MustCompile("(?i)" + `(?i)i\'?(?:\s?am|m)([^.?!]*)[.?!]?`)
 	if matched := re.MatchString(input); matched {
-		return re.ReplaceAllString(input, "How do you know you are $1?") // checks for "I am" and gives this response
+		return re.ReplaceAllString(input, "How do you know you are $1?") // checks for "I am, I'm & Im" and gives this response
 	}
-	/*
-		re2 := regexp.MustCompile(`(?i)I'm ([^.?!]*)[.?!]?`)
-		if matched := re2.MatchString(input); matched {
-			return re.ReplaceAllString(input, "How do you know you are $1?") // checks for "I'm" and gives this response
-		}*/
+
+	re2 := regexp.MustCompile(`(?i)I'm ([^.?!]*)[.?!]?`)
+	if matched := re2.MatchString(input); matched {
+		return re.ReplaceAllString(input, "How do you know you are $1?") // checks for "I'm" and gives this response
+	}
 	answers := []string{ // randon answers given if there are no matches
 		"I’m not sure what you’re trying to say. Could you explain it to me?",
 		"How does that make you feel?",

@@ -84,10 +84,11 @@ func Reflect(input string) string {
 	return strings.Join(tokens, " ")
 } // reflect
 func main() {
-
+	fmt.Println("  Eliza    ")
+	fmt.Println("===========")
 	for i := 0; i < 14; i++ {
 
 		fmt.Println("Q:" + ques[i])
-		fmt.Println("Re:" + ElizaResponse(ques[i]))
+		fmt.Println("Re:" + ElizaResponse(ques[i]) + "\n")
 	}
 } // main

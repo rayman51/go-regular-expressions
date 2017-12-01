@@ -2,12 +2,11 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
-	"regexp"
+	"math/rand" // imports
+	"regexp"    //used
+	"strings"
 	"time"
 )
-
-//used
 
 var ques = []string{
 	"People say I look like both my mother and father.",
@@ -21,23 +20,19 @@ var ques = []string{
 	"I am not happy with your responses.",
 	"I am not sure that you understand the effect that your questions are having on me.",
 	"I am supposed to just take what you’re saying at face value?",
-}
+} // array of questions for eliza
 
 // https://gist.github.com/ianmcloughlin/c4c2b8dc586d06943f54b75d9e2250fe
 func ElizaResponse(input string) string {
 	if matched, _ := regexp.MatchString(`(?i).*\bfather\b.*`, input); matched {
 		return "Why don’t you tell me more about your father?" //checks for the word "father" and gives this response
 	}
-
+	//https: //regex101.com/r/xE2vT0/1 (rerex tester)
 	re := regexp.MustCompile("(?i)" + `(?i)i\'?(?:\s?am|m)([^.?!]*)[.?!]?`)
 	if matched := re.MatchString(input); matched {
 		return re.ReplaceAllString(input, "How do you know you are $1?") // checks for "I am, I'm & Im" and gives this response
 	}
 
-	re2 := regexp.MustCompile(`(?i)I'm ([^.?!]*)[.?!]?`)
-	if matched := re2.MatchString(input); matched {
-		return re.ReplaceAllString(input, "How do you know you are $1?") // checks for "I'm" and gives this response
-	}
 	answers := []string{ // randon answers given if there are no matches
 		"I’m not sure what you’re trying to say. Could you explain it to me?",
 		"How does that make you feel?",
@@ -46,8 +41,35 @@ func ElizaResponse(input string) string {
 	rand.Seed(time.Now().UTC().UnixNano())
 
 	return answers[rand.Intn(len(answers))]
-}
 
+} // elizaResponse
+func Reflect(input string) string {
+	// Split the input on word boundaries.
+	boundaries := regexp.MustCompile(`\b`)
+	tokens := boundaries.Split(input, -1)
+
+	// List the reflections.
+	reflections := [][]string{
+		{`I`, `you`},
+		{`me`, `you`},
+		{`you`, `me`},
+		{`my`, `your`},
+		{`your`, `my`},
+	}
+
+	// Loop through each token, reflecting it if there's a match.
+	for i, token := range tokens {
+		for _, reflection := range reflections {
+			if matched, _ := regexp.MatchString(reflection[0], token); matched {
+				tokens[i] = reflection[1]
+				break
+			}
+		}
+	}
+
+	// Put the tokens back together.
+	return strings.Join(tokens, " ")
+} // reflect
 func main() {
 	/*var input string // variables used
 	fmt.Println("=======================")
@@ -101,7 +123,7 @@ func main() {
 	fmt.Println(ElizaResponse("I am supposed to just take what you’re saying at face value?"))
 	fmt.Println() // matches I am
 	*/
-	for i := 0; i < 9; i++ {
+	for i := 0; i < 11; i++ {
 
 		fmt.Println("Q:" + ques[i])
 		fmt.Println("Re:" + ElizaResponse(ques[i]))
